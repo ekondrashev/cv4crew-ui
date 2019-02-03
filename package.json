@@ -14,6 +14,7 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "ajv-keywords": "^3.3.0",
     "bootstrap": "^4.0.0-beta.2",
     "bootstrap-vue": "latest",
     "cv4_crew": "github:ekondrashev/cv4crew-api-client-js",
@@ -22,6 +23,7 @@
     "popper.js": "^1.12.9",
     "sass-loader": "^7.1.0",
     "vue": "^2.5.2",
+    "vue-cli": "^2.9.6",
     "vue-router": "^3.0.1",
     "vue-stepper": "^1.4.1",
     "vuelidate": "^0.7.4"
