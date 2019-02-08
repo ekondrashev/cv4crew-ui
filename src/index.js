@@ -1,1 +1,1 @@
-module.exports = require('./HorizontalStepper.vue');
+module.exports = require('./../node_modules/vue-stepper/src/HorizontalStepper.vue');
