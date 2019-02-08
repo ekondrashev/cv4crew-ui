@@ -2,11 +2,11 @@
     <div id="app">
         <!--Example dependecies-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.1/css/bulma.min.css">
-        <a :href="repoUrl"><img
-                style="position: absolute; top: 0; right: 0; border: 0;"
-                src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67"
-                alt="Fork me on GitHub"
-                data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+        <!--<a :href="repoUrl"><img-->
+                <!--style="position: absolute; top: 0; right: 0; border: 0;"-->
+                <!--src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67"-->
+                <!--alt="Fork me on GitHub"-->
+                <!--data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>-->
 
         <!--Example Elements-->
         <section class="hero">
@@ -14,23 +14,23 @@
                 <div class="container">
                     <div class="columns">
                         <div class="column is-8 is-offset-3" style="display: flex; align-items: center;">
-                            <div class="is-pulled-left">
-                                <img width="350px" src="assets/logo.png">
-                            </div>
-                            <div class="is-pulled-left" style="text-align: left">
-                                <h1 class="title text-medium-grey" style="margin-bottom: .5rem">
-                                    Stepper
-                                </h1>
-                                <hr class="is-marginless">
-                                <h2 class="subtitle text-light-grey" style="margin-top: .5rem">
-                                    A Vue Component
-                                    <span class="is-pulled-right">
-                                        <!-- Place this tag where you want the button to render. -->
-<a class="github-button" href="https://github.com/PygmySlowLoris/vue-stepper" data-icon="octicon-star" data-size="large"
-   aria-label="Star PygmySlowLoris/vue-stepper on GitHub">Star</a>
-                                    </span>
-                                </h2>
-                            </div>
+                            <!--<div class="is-pulled-left">-->
+                                <!--<img width="350px" src="./assets/logo.png">-->
+                            <!--</div>-->
+                            <!--<div class="is-pulled-left" style="text-align: left">-->
+                                <!--<h1 class="title text-medium-grey" style="margin-bottom: .5rem">-->
+                                    <!--Stepper-->
+                                <!--</h1>-->
+                                <!--<hr class="is-marginless">-->
+                                <!--<h2 class="subtitle text-light-grey" style="margin-top: .5rem">-->
+                                    <!--A Vue Component-->
+                                    <!--<span class="is-pulled-right">-->
+                                        <!--&lt;!&ndash; Place this tag where you want the button to render. &ndash;&gt;-->
+<!--<a class="github-button" href="https://github.com/PygmySlowLoris/vue-stepper" data-icon="octicon-star" data-size="large"-->
+   <!--aria-label="Star PygmySlowLoris/vue-stepper on GitHub">Star</a>-->
+                                    <!--</span>-->
+                                <!--</h2>-->
+                            <!--</div>-->
                         </div>
                     </div>
                 </div>
@@ -51,13 +51,15 @@
         <footer class="footer">
             <div class="container">
                 <div class="content has-text-centered">
-                    <p>
-                        <strong>Stepper Vue Component</strong> by <a
-                            :href="teamUrl">Pygmy Team</a>.
-                    </p>
-                    <p>
-                        <small>Used dependencies for this demo: <a href="http://bulma.io">bulma</a></small>
-                    </p>
+                    <!--<p>-->
+                        <!--<strong>Stepper Vue Component</strong> by <a-->
+                            <!--:href="teamUrl">Pygmy Team</a>.-->
+                    <!--</p>-->
+                    <!--<p>-->
+                        <!--<small>Used dependencies for this demo: <a href="http://bulma.io">bulma</a></small>-->
+                    <!--</p>-->
+                  <p> Dev team :-)
+                  </p>
                 </div>
             </div>
         </footer>
@@ -65,14 +67,14 @@
 </template>
 
 <script>
-  import HorizontalStepper from './HorizontalStepper.vue'
+  import HorizontalStepper from './../node_modules/vue-stepper/src/HorizontalStepper.vue'
     // import HorizontalStepper from 'src1/HorizontalStepper.vue'
 
-import StepOne from './StepOne.vue'
-import StepTwo from './StepTwo.vue'
+import StepOne from './components/pinfo_stepper/StepOne.vue'
+import StepTwo from './components/pinfo_stepper/StepTwo.vue'
 
-const teamUrl = 'https://github.com/PygmySlowLoris'
-const repoUrl = 'https://github.com/PygmySlowLoris/vue-stepper'
+// const teamUrl = 'https://github.com/PygmySlowLoris'
+// const repoUrl = 'https://github.com/PygmySlowLoris/vue-stepper'
 
 export default {
     name: 'app',
@@ -81,14 +83,14 @@ export default {
     },
     data () {
       return {
-        repoUrl: repoUrl,
-        teamUrl: teamUrl,
+        // repoUrl: repoUrl,
+        // teamUrl: teamUrl,
         demoSteps: [
           {
             icon: 'mail',
             name: 'first',
-            title: 'Sample title 1',
-            subtitle: 'Subtitle sample',
+            title: 'Personal Details',
+            subtitle: 'Personal Details',
             component: StepOne,
             completed: false
 
@@ -96,8 +98,8 @@ export default {
           {
             icon: 'report_problem',
             name: 'second',
-            title: 'Sample title 2',
-            subtitle: 'Subtitle sample',
+            title: 'Contact',
+            subtitle: 'Contact info',
             component: StepTwo,
             completed: false
           },
@@ -210,5 +212,9 @@ export default {
 
     .vertical-separator .line {
         border-right: 1px solid #cccccc;
+    }
+
+    .footer {
+        height: 100px;
     }
 </style>
