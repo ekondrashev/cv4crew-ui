@@ -90,6 +90,12 @@
     <div class="field">
       <label class="label">Nationality</label>
       <div class="control">
+        <select v-for="color in colors"
+                v-model="color.selectedOption">
+          <option v-for="option in color.options" :value="option">
+
+          </option>
+        </select>
         <input
           :class="['input', $v.form.nationality.$error ? 'is-danger' : '']"
           type="text"
@@ -244,7 +250,41 @@
   // import {required, email} from 'vuelidate/lib/validators'
   import {required, minLength, alpha} from 'vuelidate/lib/validators'
   // import {Axios} from 'axios'
+  // import Vue from 'vue'
+  // import Swagger from 'swagger-client'
+  // import APISpec from '../api-docs.yml'
+  // const APISpec = require('../api-docs.yml')
 
+  // const APIClient = {
+  //   install (Vue, options) {
+  //     Swagger({ spec: APISpec }).then((client) => {
+  //       Vue.prototype.$client = client
+  //       Vue.prototype.$api = client.apis
+  //     }, (error) => {
+  //       console.error('failed to load api spec: %o', error)
+  //     })
+  //   }
+  // }
+
+  // Vue.use(APIClient)
+  // const swaggerGen = require('swagger-vue')
+  // const jsonData = require('../api-docs.yml')
+  // const fs = require('fs')
+  // const path = require('path')
+  // let opt = {
+  //   swagger: jsonData,
+  //   moduleName: 'cv4_crew',
+  //   className: 'ApiClient'
+  // }
+  // const codeResult = swaggerGen(opt)
+  // fs.writeFileSync(path.join(__dirname, '../dist/api.js'), codeResult)
+  // const p = require('platform')
+  // const ApiClient = p.ApiClient
+  // import ApiClient from 'platform'
+
+  import ApiClient from './../../../node_modules/cv4_crew/src/ApiClient.js'
+  var defaultClient = ApiClient.instance
+  console.log(defaultClient)
   export default {
     props: ['clickedNext', 'currentStep'],
     mixins: [validationMixin],
