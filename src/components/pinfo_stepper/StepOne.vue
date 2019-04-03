@@ -246,45 +246,26 @@
 </template>
 
 <script>
+  var Cv4Crew = require('cv4_crew')
+  console.log(Cv4Crew.Countries)
   import {validationMixin} from 'vuelidate'
   // import {required, email} from 'vuelidate/lib/validators'
   import {required, minLength, alpha} from 'vuelidate/lib/validators'
-  // import {Axios} from 'axios'
-  // import Vue from 'vue'
-  // import Swagger from 'swagger-client'
-  // import APISpec from '../api-docs.yml'
-  // const APISpec = require('../api-docs.yml')
-
-  // const APIClient = {
-  //   install (Vue, options) {
-  //     Swagger({ spec: APISpec }).then((client) => {
-  //       Vue.prototype.$client = client
-  //       Vue.prototype.$api = client.apis
-  //     }, (error) => {
-  //       console.error('failed to load api spec: %o', error)
-  //     })
-  //   }
-  // }
-
-  // Vue.use(APIClient)
-  // const swaggerGen = require('swagger-vue')
-  // const jsonData = require('../api-docs.yml')
-  // const fs = require('fs')
-  // const path = require('path')
-  // let opt = {
-  //   swagger: jsonData,
-  //   moduleName: 'cv4_crew',
-  //   className: 'ApiClient'
-  // }
-  // const codeResult = swaggerGen(opt)
-  // fs.writeFileSync(path.join(__dirname, '../dist/api.js'), codeResult)
-  // const p = require('platform')
-  // const ApiClient = p.ApiClient
-  // import ApiClient from 'platform'
-
-  import ApiClient from './../../../node_modules/cv4_crew/src/ApiClient.js'
-  var defaultClient = ApiClient.instance
+  var defaultClient = Cv4Crew.ApiClient.instance
+  console.log('Default client')
+  defaultClient.basePath = 'https://cv4crew-api.herokuapp.com/v1'
   console.log(defaultClient)
+  var api = new Cv4Crew.DefaultApi()
+  console.log('Default Api')
+  console.log(api)
+  var callback = function (error, data, response) {
+    if (error) {
+      console.error(error)
+    } else {
+      console.log('API called successfully. Returned data: ' + data)
+    }
+  }
+  api.getPersonalDetails(callback)
   export default {
     props: ['clickedNext', 'currentStep'],
     mixins: [validationMixin],
