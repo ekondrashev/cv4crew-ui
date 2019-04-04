@@ -90,12 +90,6 @@
     <div class="field">
       <label class="label">Nationality</label>
       <div class="control">
-        <select v-for="color in colors"
-                v-model="color.selectedOption">
-          <option v-for="option in color.options" :value="option">
-
-          </option>
-        </select>
         <input
           :class="['input', $v.form.nationality.$error ? 'is-danger' : '']"
           type="text"
@@ -124,12 +118,20 @@
     <div class="field">
       <label class="label">Country Region of Residence</label>
       <div class="control">
-        <input
-          :class="['input', $v.form.country_reg_residence.$error ? 'is-danger' : '']"
-          type="text"
-          placeholder="Place of Country Region of Residence input"
-          v-model="form.country_reg_residence"
-        />
+        <select class="input uppercase" v-model="form.country_reg_residence">
+          <!--type="text"-->
+          <!--placeholder="Place of Country Region of Residence input"-->
+
+          <option v-for="(item, key) in countries" :value="item">
+            {{item}}
+          </option>
+        </select>
+        <!--<input-->
+        <!--:class="['input', $v.form.country_reg_residence.$error ? 'is-danger' : '']"-->
+        <!--type="text"-->
+        <!--placeholder="Place of Country Region of Residence input"-->
+        <!--v-model="form.country_reg_residence"-->
+        <!--/>-->
       </div>
       <p v-if="$v.form.country_reg_residence.$error" class="is-danger">
         This Place of Country Region of Residence is invalid
@@ -203,45 +205,6 @@
       </p>
     </div>
 
-
-    <!--<div class="field">-->
-    <!--<label class="label">Username</label>-->
-    <!--<div class="control">-->
-    <!--<input-->
-    <!--:class="['input', $v.form.username.$error ? 'is-danger' : '']"-->
-    <!--type="text"-->
-    <!--placeholder="Text input"-->
-    <!--v-model="form.username"-->
-    <!--/>-->
-    <!--</div>-->
-    <!--<p v-if="$v.form.username.$error" class="help is-danger">-->
-    <!--This username is invalid-->
-    <!--</p>-->
-    <!--</div>-->
-    <!--<div class="field">-->
-    <!--<label class="label">Email</label>-->
-    <!--<div class="control">-->
-    <!--<input-->
-    <!--:class="['input', $v.form.demoEmail.$error ? 'is-danger' : '']"-->
-    <!--type="text"-->
-    <!--placeholder="Email input"-->
-    <!--v-model="form.demoEmail"-->
-    <!--/>-->
-    <!--</div>-->
-    <!--<p v-if="$v.form.demoEmail.$error" class="help is-danger">-->
-    <!--This email is invalid-->
-    <!--</p>-->
-    <!--</div>-->
-    <!--<div class="field">-->
-    <!--<label class="label">Message</label>-->
-    <!--<div class="control">-->
-    <!--<textarea-->
-    <!--:class="['textarea', $v.form.message.$error ? 'is-danger' : '']"-->
-    <!--placeholder="Textarea"-->
-    <!--v-model="form.message"-->
-    <!--&gt;</textarea>-->
-    <!--</div>-->
-    <!--</div>-->
   </div>
 </template>
 
@@ -249,8 +212,8 @@
   var Cv4Crew = require('cv4_crew')
   console.log(Cv4Crew.Countries)
   import {validationMixin} from 'vuelidate'
-  // import {required, email} from 'vuelidate/lib/validators'
   import {required, minLength, alpha} from 'vuelidate/lib/validators'
+
   var defaultClient = Cv4Crew.ApiClient.instance
   console.log('Default client')
   defaultClient.basePath = 'https://cv4crew-api.herokuapp.com/v1'
@@ -276,6 +239,7 @@
           lastName: '',
           middleName: '',
           gender: '',
+          countries: [],
           birthDate: '',
           birthPlace: '',
           nationality: '',
@@ -317,8 +281,7 @@
           alpha
         },
         country_residence: {
-          required,
-          alpha
+          required
         },
         country_reg_residence: {
           required,
@@ -366,19 +329,23 @@
       } else {
         this.$emit('can-continue', {value: false})
       }
+    },
+    created () {
+      console.log('call created()')
+      // todo: fix the last element in array due to last value is 'value="function(object) { return object; }'
+      this.countries = Object.values(Cv4Crew.Countries)
+      console.log(this.countries)
     }
-    // ,
-    // beforeCreate () {
-    //   Axios
-    //     .get('https://api.coindesk.com/v1/bpi/currentprice.json')
-    //     .then(response => (this.info = response))
-    // }
   }
 
 </script>
 
 <style scoped>
-  .is-danger{
+  .is-danger {
     color: #FF0000;
   }
+  .uppercase{
+    text-transform: uppercase;
+  }
 </style>
+
