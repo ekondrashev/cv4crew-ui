@@ -2,7 +2,7 @@
   <div style="padding: 2rem 3rem; text-align: left;">
 
     <div class="field">
-      <label class="label">First Name</label>
+      <label class="label">First Name<span class="required">*</span></label>
       <div class="control">
         <input
           :class="['input', $v.form.firstName.$error ? 'is-danger' : '']"
@@ -16,7 +16,7 @@
       </p>
     </div>
     <div class="field">
-      <label class="label">Last Name</label>
+      <label class="label">Last Name<span class="required">*</span></label>
       <div class="control">
         <input
           :class="['input', $v.form.lastName.$error ? 'is-danger' : '']"
@@ -44,7 +44,7 @@
       </p>
     </div>
     <div class="field">
-      <label class="label">Gender</label>
+      <label class="label">Gender<span class="required">*</span></label>
       <div class="control">
         <input type="radio" id="male" value="male"
                :class="['radio', $v.form.gender.$error ? 'is-danger' : '']"
@@ -61,7 +61,7 @@
       </p>
     </div>
     <div class="field">
-      <label class="label">Birth Date</label>
+      <label class="label">Birth Date<span class="required">*</span></label>
       <div class="control">
         <input
           :class="['input', $v.form.birthDate.$error ? 'is-danger' : '']"
@@ -74,7 +74,7 @@
       </p>
     </div>
     <div class="field">
-      <label class="label">Place of birth</label>
+      <label class="label">Place of birth<span class="required">*</span></label>
       <div class="control">
         <input
           :class="['input', $v.form.birthPlace.$error ? 'is-danger' : '']"
@@ -88,7 +88,7 @@
       </p>
     </div>
     <div class="field">
-      <label class="label">Nationality</label>
+      <label class="label">Nationality<span class="required">*</span></label>
       <div class="control">
         <input
           :class="['input', $v.form.nationality.$error ? 'is-danger' : '']"
@@ -102,13 +102,11 @@
       </p>
     </div>
     <div class="field">
-      <label class="label">Country of Residence</label>
-      <div class="control">
+      <label class="label">Country of Residence<span class="required">*</span></label>
+      <div class="select">
         <select class="input" v-model="form.country_residence">
           <option value="" hidden selected>Select Country of Residence</option>
-          <option v-for="(item, key) in countries" :value="item">
-            {{item}}
-          </option>
+          <option class="text-uppercase" v-for="(item, key) in countries" :value="item">{{item}}</option>
         </select>
       </div>
       <p v-if="$v.form.country_residence.$error" class="is-danger">
@@ -116,7 +114,7 @@
       </p>
     </div>
     <div class="field">
-      <label class="label">Country Region of Residence</label>
+      <label class="label">Country Region of Residence<span class="required">*</span></label>
       <div class="control">
         <input
         :class="['input', $v.form.country_reg_residence.$error ? 'is-danger' : '']"
@@ -130,7 +128,7 @@
       </p>
     </div>
     <div class="field">
-      <label class="label">Nearest Airport</label>
+      <label class="label">Nearest Airport<span class="required">*</span></label>
       <div class="control">
         <input
           :class="['input', $v.form.airport.$error ? 'is-danger' : '']"
@@ -144,7 +142,7 @@
       </p>
     </div>
     <div class="field">
-      <label class="label">Citizenship</label>
+      <label class="label">Citizenship<span class="required">*</span></label>
       <div class="control">
         <input
           :class="['input', $v.form.citizenship.$error ? 'is-danger' : '']"
@@ -158,7 +156,7 @@
       </p>
     </div>
     <div class="field">
-      <label class="label">Marital Status</label>
+      <label class="label">Marital Status<span class="required">*</span></label>
       <div class="control">
         <input type="radio" id="single" value="single"
                :class="['radio', $v.form.marital_status.$error ? 'is-danger' : '']"
@@ -175,7 +173,7 @@
       </p>
     </div>
     <div class="field">
-      <label class="label">Military Service</label>
+      <label class="label">Military Service<span class="required">*</span></label>
       <div class="control">
         <input type="radio" id="completed" value="completed"
                :class="['radio', $v.form.military_service.$error ? 'is-danger' : '']"
@@ -195,6 +193,9 @@
       <p v-if="$v.form.military_service.$error" class="is-danger">
         Please select your Military Service
       </p>
+    </div>
+    <div>
+      <p class="required"> * - required fields</p>
     </div>
 
   </div>
@@ -324,14 +325,15 @@
     },
     created () {
       console.log('call created()')
-      this.countries = Object.values(Cv4Crew.Countries).slice(0, -1)
+      // remove the last element due to the element is a js code
+      this.countries = Object.values(Cv4Crew.Countries).slice(0, -1).map(x => x.toUpperCase())
     }
   }
 
 </script>
 
 <style scoped>
-  .is-danger {
+  .is-danger, .required {
     color: #FF0000;
   }
 
