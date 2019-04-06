@@ -104,12 +104,12 @@
     <div class="field">
       <label class="label">Country of Residence</label>
       <div class="control">
-        <input
-          :class="['input', $v.form.country_residence.$error ? 'is-danger' : '']"
-          type="text"
-          placeholder="Place of Country of Residence input"
-          v-model="form.country_residence"
-        />
+        <select class="input" v-model="form.country_residence">
+          <option value="" hidden selected>Select Country of Residence</option>
+          <option v-for="(item, key) in countries" :value="item">
+            {{item}}
+          </option>
+        </select>
       </div>
       <p v-if="$v.form.country_residence.$error" class="is-danger">
         This Place of Country of Residence is invalid
@@ -118,23 +118,15 @@
     <div class="field">
       <label class="label">Country Region of Residence</label>
       <div class="control">
-        <select class="input uppercase" v-model="form.country_reg_residence">
-          <!--type="text"-->
-          <!--placeholder="Place of Country Region of Residence input"-->
-
-          <option v-for="(item, key) in countries" :value="item">
-            {{item}}
-          </option>
-        </select>
-        <!--<input-->
-        <!--:class="['input', $v.form.country_reg_residence.$error ? 'is-danger' : '']"-->
-        <!--type="text"-->
-        <!--placeholder="Place of Country Region of Residence input"-->
-        <!--v-model="form.country_reg_residence"-->
-        <!--/>-->
+        <input
+        :class="['input', $v.form.country_reg_residence.$error ? 'is-danger' : '']"
+        type="text"
+        placeholder="Place of Country Region of Residence input"
+        v-model="form.country_reg_residence"
+        />
       </div>
       <p v-if="$v.form.country_reg_residence.$error" class="is-danger">
-        This Place of Country Region of Residence is invalid
+        Please select Place of Country Region of Residence
       </p>
     </div>
     <div class="field">
@@ -143,7 +135,7 @@
         <input
           :class="['input', $v.form.airport.$error ? 'is-danger' : '']"
           type="text"
-          placeholder="Place of Country Region of Residence input"
+          placeholder="Place of Nearest Airport input"
           v-model="form.airport"
         />
       </div>
@@ -218,7 +210,7 @@
   console.log('Default client')
   defaultClient.basePath = 'https://cv4crew-api.herokuapp.com/v1'
   console.log(defaultClient)
-  var api = new Cv4Crew.DefaultApi()
+  const api = new Cv4Crew.DefaultApi()
   console.log('Default Api')
   console.log(api)
   var callback = function (error, data, response) {
@@ -239,7 +231,6 @@
           lastName: '',
           middleName: '',
           gender: '',
-          countries: [],
           birthDate: '',
           birthPlace: '',
           nationality: '',
@@ -248,7 +239,8 @@
           airport: '',
           citizenship: '',
           marital_status: '',
-          military_service: ''
+          military_service: '',
+          countries: []
         }
       }
     },
@@ -332,9 +324,7 @@
     },
     created () {
       console.log('call created()')
-      // todo: fix the last element in array due to last value is 'value="function(object) { return object; }'
-      this.countries = Object.values(Cv4Crew.Countries)
-      console.log(this.countries)
+      this.countries = Object.values(Cv4Crew.Countries).slice(0, -1)
     }
   }
 
@@ -344,8 +334,6 @@
   .is-danger {
     color: #FF0000;
   }
-  .uppercase{
-    text-transform: uppercase;
-  }
+
 </style>
 
